@@ -1,0 +1,73 @@
+{% extends "base.twig" %}
+
+{% block css %}
+    <link rel="stylesheet" href="./css/aside.css">
+    <title>Votre Panier ({{count_panier.nb_favoris}}) | The shoes Spot</title>
+
+{% endblock %}
+{% block main %}
+    <div class="alignement-aside flex fullwidth ">
+        <div class="wrapper list-article flex dir-col">
+    {% if username != "" %}
+        <div class="header_article flex center" >
+            <h2 class="titre_categorie" >Votre panier <span class="genre">({% if count_panier.nb_favoris == 0 %}0{% else %}{{count_panier.nb_favoris}}{% endif %})</span></h2>
+        </div>
+            {% for article in article %}
+            <article class="article-description flex">
+                <div class="article-img" style="background-image: url({{article.lien_image}})" title="{{article.nom_marque}}-{{article.nom_article}}">
+                    <p class="count"> x{{article.count}} </p>
+                </div>
+                {# <img class="article-img" src="{{article.lien_image}}" alt="{{article.nom_article}}"> #}
+                <div class="align-article flex dir-col fullwidth">
+                    <h2>{{article.nom_marque}}</h2>
+                    <ul class="flex spacebetween fullwidth">
+                        <li><h2>{{article.nom_article}}</h2></li>
+                        <li class="prix-article">{{article.prix}} €</li>
+                    </ul>
+                    <ul class="flex spacebetween">
+                        <li><p class="genre uppercase" >{{article.genre}}</p></li>
+                        {% if article.note_moyenne != NULL %}
+                        <li class="note-moyenne flex dir-row">{% set etoile = article.note_moyenne|round %} 
+                            {% for i in 0..4 %}
+                                {% if i < etoile %}
+                                    ★
+                                {% else %}
+                                    ☆
+                                {% endif %}
+                            {% endfor %}
+                            <p class="note-moyenne-grise">({{article.note_moyenne}})</p></li>
+                        {% else %}
+                            <li><p class="note-moyenne-grise">Aucun avis disponible</p></li>
+                        {% endif %}
+                    </ul>
+                    <p>{{article.description}}</p>
+                    <div class="button_lignes flex">
+                        <form action="process_panier.php" method="post">
+                            <input class="input_panier" type="hidden" name="id_panier" value="{{article.id_article}}">
+                            <button type="submit" class="button-submit" ><i class="bi bi-dash-circle-dotted"></i> Retirer du panier</button>
+                        </form>
+                        <a class="button-submit gray" href="article.php?id={{article.id_article}}">View details</a>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+        <aside class="recapitulatif" >
+            <h2>Récapitulatif</h2>
+            <p><span class="orange" >{{count_panier.nb_favoris}}</span> Article(s) dans le panier</p>
+            <p>Prix Moyen d'un article : <span class="orange">{{count_panier.prix_moyen}} €</span></p>
+            {% if count_panier.nb_favoris != 0 %}
+                <p class="total" > Total : <span class="prix-article" >{{count_panier.somme_prix}} €</span></p>
+                <button class="button-submit button-commande"  >Passer commande </button>
+            {% else %}
+                <p class="total">Votre panier est vide !</p>
+            {% endif %}
+            {% else %}
+            <div class="header_article" >
+                <h2 class="titre_categorie" >Votre panier : {% if count_panier.nb_favoris == 0 %}Vous n'avez pas d'articles dans votre panier, <a href="compte.php" class="orange" >connectez-vous</a> pour en ajouter {% else %} {{count_panier.nb_favoris}} {% endif %}</h2>
+            </div>
+            {% endif %}
+        </aside>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends "base.twig" %}
+
+{% block css %}
+    <link rel="stylesheet" href="./css/article.css">
+    <title>{{article.nom_article}} | The shoes Spot</title>
+{% endblock %}
+{% block main %}
+    <div class="wrapper" >
+        <section class="article flex" >
+            <article class="show_image flex spacebetween">
+            {% for i in range(0, image|length - 1) %}
+                <img src="{{ image[i]['lien_image'] }}" alt="{{ article.nom_article }}">
+            {% endfor %}
+            </article>
+            <div class="alignement-description flex dir-col">
+                <article class="article-description">
+                    <h2>{{article.nom_marque}}</h2>
+                    <ul class="flex spacebetween">
+                        <li><h2>{{article.nom_article}}</h2></li>
+                        <li class="prix-article" >{{article.prix}}€</li>
+                    </ul>
+                    <p class="genre uppercase" >{{article.genre}}</p>
+                    <p>{{article.description}}</p>
+                    <ul class="flex spacebetween">
+                        <li><p>Vendu par : {{article.nom_vendeur}}</p></li>
+                        {% if commentaire == [] %}
+                            <li><p class="note-moyenne-grise">Aucun avis disponible</p></li>
+                        {% else %}
+                        <li class="note-moyenne flex dir-row">{% set etoile = moyenne.moyenne_note|round %} 
+                            {% for i in 0..4 %}
+                                {% if i < etoile %}
+                                    ★
+                                {% else %}
+                                    ☆
+                                {% endif %}
+                            {% endfor %}
+                            <p class="note-moyenne-grise">({{moyenne.moyenne_note}})</p></li>
+                        {% endif %}
+                    </ul>
+                    {% if username != '' %}
+                        <form action="panier.php" method="post">
+                            <input class="input_panier" type="hidden" name="id_panier" value="{{article.id_article}}">
+                            <button type="submit" class="button-submit" ><i class="bi bi-cart-dash"></i> Ajouter au panier</button>
+                        </form>
+                    {% else %}
+                    <p class="disabled" >Connectez-vous pour pouvoir ajouter des articles au panier.</p>
+                    {% endif %}
+                </article>
+                <article class="article-avis">
+                    {% if username != '' %}
+                        <form action="process_commentaire.php" method="post" class="form-com flex dir-col" >
+                            <div class="rate flex">
+                                <input type="radio" id="star5" name="note_article" value="5" required/>
+                                <label for="star5">5 stars</label>
+                                <input type="radio" id="star4" name="note_article" value="4" required/>
+                                <label for="star4">4 stars</label>
+                                <input type="radio" id="star3" name="note_article" value="3" required/>
+                                <label for="star3">3 étoiles</label>
+                                <input type="radio" id="star2" name="note_article" value="2" required/>
+                                <label for="star2">2 étoiles</label>
+                                <input type="radio" id="star1" name="note_article" value="1" required/>
+                                <label for="star1">1 étoile</label>
+                            </div>
+                            <textarea name="com_article" rows="5" cols="33" placeholder="Ajoutez un Commentaire" maxlength="200"></textarea>
+                            <input type="hidden" name="id_article" value="{{article.id_article}}">
+                            <button type="submit" class="button-submit" ><i class="bi bi-chat-left-text"></i> Soumettre</button>
+                        </form>
+                    {% else %}
+                        <p>Connectez-vous pour écrire un commentaire</p>
+                    {% endif %}
+                    <details class="detail-avis" {% if commentaire == [] %} open {% endif %}>
+                        <summary>&nbsp; &nbsp; Avis Clients <span class="disabled" >({{nb_avis.nombre_avis}})</span></summary>
+                        {% if commentaire != [] %}
+                            {% for commentaire in commentaire %}
+                                <article>                  
+                                    <ul class="flex spacebetween" >
+                                        <li class="flex dir-row center"><i class="bi bi-person-fill pdp-com"></i><p class="user-com" >{{commentaire.username}}</p><p class="date-com" >{{commentaire.date}}</p></li>
+                                        <li><p class="note-com">{% set etoile = commentaire.note_article %}
+                                        {% for i in 0..4 %}
+                                            {% if i < etoile %}
+                                                ★
+                                            {% else %}
+                                                ☆
+                                            {% endif %}
+                                        {% endfor %}
+                                        </p></li>
+                                    </ul>       
+                                    <p> {{commentaire.com_article}} </p>
+                                </article>
+                            {% endfor %}
+                        {% else %}
+                            <p>Il n'y a pas encore de commentaires disponibles pour cet article</p>
+                        {% endif %}
+                    </details>
+                </article>
+            </div>
+        </section>
+
+    </div>
+{% endblock %}

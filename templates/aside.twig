@@ -1,0 +1,143 @@
+{% extends "base.twig" %}
+
+{% block css %}
+    <link rel="stylesheet" href="./css/aside.css">
+    <title>{% if id == 0 %}Nos Chaussures {% else %} {{cat.nom_cat}} {% endif %} | The Shoes Spot</title>
+{% endblock %}
+{% block main %}
+        <aside>
+            <form class="form_tri flex dir-col" method="post" name="marque" id="marque">
+            <p class="genre">Marques :</p>
+                <label><input type="checkbox" name="marque[]" value="1, 2, 3, 4, 5, 6, 7, 8"  {% if marque is defined and marque == "1, 2, 3, 4, 5, 6, 7, 8" or marque[0] == "1, 2, 3, 4, 5, 6, 7, 8" %}checked{% endif %}>Toutes<span class="genre">({{count_all.nombre_articles}})</span></label>
+            {% for count_marques_cat in count_marques_cat %}
+                    <label><input type="checkbox" name="marque[]" value="{{count_marques_cat.id_marque}}" {% if marque is iterable and count_marques_cat.id_marque in marque %}checked{% endif %}>{{count_marques_cat.nom_marque}} <span class="genre">({{count_marques_cat.nombre_articles}})</span></label>
+            {% endfor %}
+                <button class="animated-button-submit">
+                    <div class="conteneur conteneur-btn">
+                        <div class="passif"></div>
+                        <div class="actif"></div>
+                        <h2 class="texte"><i class="bi bi-filter-square"></i> Filtrer</h2>
+                    </div>
+                </button>
+            </form>
+            <form class="form_tri flex dir-col" method="post" name="genre" id="genre">
+            <p class="genre">Genre :</p>
+                <label><input type="radio" name="genre" value="Tous" {% if genre is defined and genre == 'Tous' or genre == '' %}checked{% endif %}>Pour tous</label>
+                <label><input type="radio" name="genre" value="Homme" {% if genre is defined and genre == 'Homme' %}checked{% endif %}>Homme</label>
+                <label><input type="radio" name="genre" value="Femme" {% if genre is defined and genre == 'Femme' %}checked{% endif %}>Femme</label>
+                <button class="animated-button-submit">
+                    <div class="conteneur conteneur-btn">
+                        <div class="passif"></div>
+                        <div class="actif"></div>
+                        <h2 class="texte"><i class="bi bi-filter-square"></i> Filtrer</h2>
+                    </div>
+                </button>
+            </form>
+        </aside>
+        <div {% if mode_affichage == 'liste' %} class="wrapper list-article flex dir-col fullwidth" {% else %} class="wrapper vignette-article flex dir-col fullwidth" {% endif %}>
+            <div class="header_article flex dir-row spacebetween" >
+                <h2 class="titre_categorie" >Catégorie : {% if id == 0 %}Nos Chaussures {% else %} {{cat.nom_cat}} {% endif %}<span class="genre" >({{ count_all_marque_cat_genre.nombre_articles }})</span></h2>
+                <form method="post" action="index.php?id={{id}}" id="tri" >
+                    <select id="mode_tri" name="mode_tri" class="mode_tri">
+                        <option value="" {% if mode_tri is defined and mode_tri == '' %}selected{% endif %}>Par Default</option>
+                        <option value="nom-asc" {% if mode_tri is defined and mode_tri == 'nom-asc' %}selected{% endif %}>Nom de produit de A à Z</option>
+                        <option value="nom-desc" {% if mode_tri is defined and mode_tri == 'nom-desc' %}selected{% endif %}>Nom de produit de Z à A</option>
+                        <option value="prix-asc" {% if mode_tri is defined and mode_tri == 'prix-asc' %}selected{% endif %}>Prix : croissant</option>
+                        <option value="prix-desc" {% if mode_tri is defined and mode_tri == 'prix-desc' %}selected{% endif %}>Prix : décroissant</option>
+                        <option value="marque" {% if mode_tri is defined and mode_tri == 'marque' %}selected{% endif %}>Nom de Marque</option>
+                    </select>
+                </form>
+                <form method="post" action="index.php?id={{id}}" id="affichage">
+                <select id="mode_affichage" class="mode_affichage" name="mode_affichage">
+                    <option value="vignette" {% if mode_affichage is defined and mode_affichage == 'vignette' %}selected{% endif %}>Vignette</option>
+                    <option value="liste" {% if mode_affichage is defined and mode_affichage == 'liste' %}selected{% endif %}>Liste</option>
+                </select>
+                </form>
+            </div>
+            <section class="section-article flex fullwidth">
+            {% for article in article %}
+            {% if mode_affichage == 'liste' %}
+            <article class="article-description flex">
+                <div class="article-img" style="background-image: url({{article.lien_image}})" title="{{article.nom_marque}}-{{article.nom_article}}"> </div>
+                {# <img class="article-img" src="{{article.lien_image}}" alt="{{article.nom_article}}"> #}
+                <div class="align-article flex dir-col fullwidth">
+                    <h2>{{article.nom_marque}}</h2>
+                    <ul class="flex spacebetween fullwidth">
+                        <li><h2>{{article.nom_article}}</h2></li>
+                        <li class="prix-article">{{article.prix}} €</li>
+                    </ul>
+                    <ul class="flex spacebetween">
+                        <li><p class="genre uppercase" >{{article.genre}}</p></li>
+                        {% if article.note_moyenne != NULL %}
+                        <li class="note-moyenne flex dir-row">{% set etoile = article.note_moyenne|round %} 
+                            {% for i in 0..4 %}
+                                {% if i < etoile %}
+                                    ★
+                                {% else %}
+                                    ☆
+                                {% endif %}
+                            {% endfor %}
+                            <p class="note-moyenne-grise">({{article.note_moyenne}})</p></li>
+                        {% else %}
+                            <li><p class="note-moyenne-grise">Aucun avis disponible</p></li>
+                        {% endif %}
+                    </ul>
+                    <p>{{article.description}}</p>
+                    <a class="button-submit" href="article.php?id={{article.id_article}}">View details</a>
+                </div>
+            </article>
+            {% else %}
+            <a href="article.php?id={{article.id_article}}" class="article-lien article-description " >
+            <article class="flex dir-col">
+                <div class="article-img" style="background-image: url({{article.lien_image}})" title="{{article.nom_marque}}-{{article.nom_article}}"> </div>
+                {# <img class="article-img" src="{{article.lien_image}}" alt="{{article.nom_article}}"> #}
+                <div class="align-article flex dir-col fullwidth">
+                    <h2>{{article.nom_marque}}</h2>
+                    <ul class="flex spacebetween fullwidth">
+                        <li class="titre-article"><h2>{{article.nom_article}}</h2></li>
+                        <li class="prix-article">{{article.prix}} €</li>
+                    </ul>
+                    <ul class="flex spacebetween">
+                        <li><p class="genre uppercase" >{{article.genre}}</p></li>
+                        {% if article.note_moyenne != NULL %}
+                        <li class="note-moyenne flex dir-row">{% set etoile = article.note_moyenne|round %} 
+                            {% for i in 0..4 %}
+                                {% if i < etoile %}
+                                    ★
+                                {% else %}
+                                    ☆
+                                {% endif %}
+                            {% endfor %}
+                            <p class="note-moyenne-grise">({{article.note_moyenne}})</p></li>
+                        {% else %}
+                            <li><p class="note-moyenne-grise">Aucun avis disponible</p></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </article>
+            </a>
+            {% endif %}
+            {% endfor %}
+            </section>
+        </div>
+    </div>
+    <script>
+        // Obtenez le sélecteur
+        var select = document.getElementById("mode_affichage");
+        
+        // Ajoutez un événement pour détecter les changements de sélection
+        select.addEventListener("change", function() {
+            // Soumettre le formulaire
+            this.form.submit();
+        });
+
+        // Obtenez le sélecteur
+        var select = document.getElementById("mode_tri");
+        
+        // Ajoutez un événement pour détecter les changements de sélection
+        select.addEventListener("change", function() {
+            // Soumettre le formulaire
+            this.form.submit();
+        });        
+    </script>
+{% endblock %}

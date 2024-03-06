@@ -1,0 +1,177 @@
+/* Article */
+
+.article-description h1, h2, ul {
+    margin: 0;
+}
+
+.article-description {
+    border-bottom: 1px solid black;
+}
+
+.list-article .article-img {
+    width: 600px;
+    min-height: 300px;
+    margin-right: 20px;
+    background-position: 50% 50%;
+    background-size: cover;
+}
+
+.prix-article {
+    font-weight: 900;
+    color: rgb(255, 119, 0);
+    font-size: large;
+}
+
+/* Aside */
+
+.genre {
+    color: rgb(139, 139, 139);
+}   
+
+.note-moyenne {
+    color: rgb(255, 119, 0);
+}
+
+article .note-moyenne-grise {
+    margin-top: 4px;
+    color: rgb(139, 139, 139);
+    margin-left: 10px;
+}
+
+.list-article {
+    gap: 30px;
+}
+
+.align-article {
+    justify-content: space-around;
+}
+
+.mode_tri {
+    padding: 10px;
+}
+
+.mode_affichage {
+    padding: 10px;
+}
+
+.form_tri {
+    margin-top: 50px;
+}
+
+.form_tri p {
+    text-transform: uppercase;
+    font-size: larger;
+    color :rgb(143, 143, 143);
+}
+
+.form_tri input {
+    margin-right: 10px;
+}
+
+.form_tri button {
+    margin: 20px 0;
+}
+
+
+.alignement-aside {
+    gap: 30px;
+}
+
+.alignement-aside .wrapper {
+    max-width: 70%;
+}
+
+
+/* Affichage */
+
+.vignette-article {
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: smaller;
+}
+
+.vignette-article .titre-article {
+    max-width: 70%;
+}
+
+.vignette-article article {
+    max-width: 280px;
+}
+
+.vignette-article .article-img {
+    width: 280px;
+    min-height: 300px;
+    margin-right: 20px;
+    background-position: 50% 50%;
+    background-size: cover;
+}
+
+.count {
+    color: white;
+    font-weight: bolder;
+    font-size: xx-large;
+    background-color: rgba(235, 126, 37, 0.555);
+    width: fit-content;
+    padding: 10px;
+    margin: 0;
+}
+
+.article-lien {
+    text-decoration: none;
+    color: black;
+}
+
+.wrapper {
+    height: fit-content;
+}
+
+.button_lignes a {
+    margin-left: 50px;
+}
+
+.button_lignes .gray {
+    background-color: black;
+}
+
+.titre_categorie {
+    flex: 1;
+}
+
+
+/* Panier */
+
+.recapitulatif .total {
+    margin: 20px 0;
+    font-size: large;
+    font-weight: bold;
+}
+
+.section-article {
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+}
+
+.recapitulatif {
+    max-width: 300px;
+    background-color: rgb(235, 235, 235);
+    height: fit-content;
+}
+
+.recapitulatif p {
+    margin: 5px;
+}
+
+.recapitulatif h2 {
+    margin-bottom: 15px;
+}
+
+.orange {
+    color: rgb(255, 119, 0);
+    font-weight: bolder;
+}
+
+.button-commande {
+    margin: auto;
+}

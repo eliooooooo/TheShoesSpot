@@ -1,0 +1,3 @@
+ErrorDocument 404 /~burkle/SAE203_BURKLE_Eliott/404.php
+ErrorDocument 403 /~burkle/SAE203_BURKLE_Eliott/403.php
+Options -Indexes

@@ -1,0 +1,67 @@
+{% extends "base.twig" %}
+
+{% block css %}
+    <link rel="stylesheet" href="./css/compte.css">
+    <title>Votre compte | The shoes Spot</title>
+
+{% endblock %}
+{% block main %}
+    <div class="wrapper flex center dir-col">
+    {% if username == "" %}
+        <section class="article flex title-disconnect">
+            <article>
+                <h2>Connexion :</h2>
+                <form class="flex dir-col" action="process_connexion.php" method="POST">
+                    <fieldset class="form-compte">
+                        <legend>Nom d'utilisateur</legend>
+                        <input type="text" id="username" name="username" placeholder="Username" required>
+                    </fieldset>
+
+                    <fieldset class="form-compte">
+                        <legend>Mot de passe :</legend>
+                        <input type="password" id="password" name="password" placeholder="Mot de passe" required>
+                    </fieldset>
+
+                    <button class="button-submit" type="submit">Se connecter</button>
+                </form>
+            </article>
+            <article>
+                <h2>Inscription :</h2>
+                <form class="flex dir-col" action="process_inscription.php" method="POST">
+                    <fieldset class="form-compte" >
+                        <legend>Nom d'utilisateur</legend>
+                        <input type="text" id="username" name="username" placeholder="Username" required>
+                    </fieldset>
+
+                    <fieldset class="form-compte">
+                        <legend>Adresse e-mail :</legend>
+                        <input type="email" id="email" name="email" placeholder="E-mail" required>
+                    </fieldset>
+
+                    <fieldset class="form-compte">
+                        <legend>Mot de passe :</legend>
+                        <input type="password" id="password" name="password" placeholder="Mot de passe" autocomplete="off" required>
+                    </fieldset>
+
+                    <fieldset class="form-compte">
+                        <legend>Confirmer le Mdp :</legend>
+                        <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Mot de passe" autocomplete="off" required>
+                    </fieldset>
+
+                    <button class="button-submit" type="submit">S'inscrire</button>
+                </form>
+            </article>
+        </section>
+    {% else %}
+        <article class="article flex center" >
+            <i class="pdp bi bi-person-fill"></i>
+            <ul>
+                <li><h2>Nom d'utilisateur :</h2><p>{{username}}</p></li>
+                <li><h2>E-mail utilisateur :</h2><p>{{email}}</p></li>
+            </ul>
+        </article>
+        <a href="logout.php" class="button-submit">Déconnexion</a>
+    {% endif %}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,140 @@
+/* Article */
+
+.article {
+    margin: 20px 0;
+}
+
+.show_image {
+    max-width: 500px;
+    flex-wrap: wrap;
+    height: fit-content;
+}
+
+.show_image img:nth-child(1){
+    max-width: 500px;
+    margin-bottom: 20px;
+}
+
+.show_image img:nth-child(2), img:nth-child(3){
+    max-width: 240px;
+}
+
+.alignement-description {
+    margin: 20px 20px;
+}
+
+.article-description h1, h2, ul {
+    margin: 0;
+}
+
+.prix-article {
+    font-weight: 900;
+    color: rgb(255, 119, 0);
+    font-size: x-large;
+}
+
+.genre {
+    color: rgb(139, 139, 139);
+}
+
+.disabled {
+    color: rgb(139, 139, 139);
+}
+
+/* Affichage commentaires */
+
+.pdp-com{
+    background-color: rgb(190, 190, 190);
+    margin-right: 10px;
+    padding: 5px;
+    height: fit-content;
+    border-radius: 50%;
+    color: rgb(53, 52, 52);
+}
+
+.form-com input, textarea {
+    border: 0;
+    border-bottom: 1px solid black;
+}
+
+.user-com {
+    font-weight: 900;
+}
+
+.note-com {
+    color: rgb(255, 119, 0);
+}
+
+.date-com {
+    color: rgb(139, 139, 139);
+    font-size: medium;
+    margin-left: 20px;
+}
+
+.detail-avis {
+    margin-top: 50px;
+}
+
+.detail-avis:hover {
+    cursor: pointer;
+}
+
+.detail-avis summary {
+    border-bottom: 1px solid black;
+    height: fit-content;
+    font-size: large;
+}
+
+.detail-avis summary::marker {
+    content: "+";
+    font-size: xx-large;
+    color: rgb(255, 119, 0);
+}
+
+.note-moyenne {
+    color: rgb(255, 119, 0);
+}
+
+article .note-moyenne-grise {
+    margin-top: 4px;
+    color: rgb(139, 139, 139);
+    margin-left: 10px;
+}
+
+/* Note */
+
+.rate {
+    flex-direction: row-reverse;
+}
+
+.rate input {
+    display: none;
+}
+
+.rate label {
+    width: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    font-size: 25px;
+}
+
+.rate label:before {
+    content: "☆";
+    display: inline-block;
+    color: rgb(255, 119, 0);
+}
+
+.rate input:checked ~ label::before {
+    content: "★";
+}
+
+.article-avis {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid black;
+}
+
+.article-avis .button-submit {
+    background-color: black;
+}

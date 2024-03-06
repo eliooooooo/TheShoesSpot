@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+	{% block css %}
+	{% endblock %}
+</head>
+
+<body class="flex dir-col" >
+	<header class="flex center" role="banner">
+		<ul class="flex dir-row fullwidth spacebetween" >
+			<li class="header-title" ><h1>The Shoes Spot</h1></li>
+			<li {% if username != '' %} class="connected-button flex dir-row center" {% else %} class="bulles-header flex dir-row center" {% endif %} ><a href="compte.php" title="Votre compte" {% if username == '' %}class="compte"{% endif %}>{% if username != '' %} {{username}} {% endif %}<i class="bi bi-person-fill"></i></a><a href="panier.php" title="Votre Panier"><i class="bi bi-cart-dash"></i></a></li>
+		</ul>
+	</header>
+	<nav role="navigation">
+      <ul class="nav-cat flex dir-row center white">
+        <li><a href="index.php">Nos chaussures</a></li>
+        {% for cat in count %}
+          <li><a href="index.php?id={{ cat.id_cat }}">{{cat.nom_cat}}</a></li>
+        {% endfor %}
+      </ul>
+	</nav>
+	<main class="flex" role="main" >
+		{% block main %}
+		{% endblock %}
+	</main>
+	<footer class="flex" role="contentinfo">
+		<ul class="footer-ul flex dir-col">
+			<li class="titre-footer">Plan du site :</li>
+			<li><a href="index.php">Nos chaussures</a></li>
+			{% for cat in count %}
+          		<li><a href="index.php?id={{ cat.id_cat }}">{{cat.nom_cat}}</a></li>
+        	{% endfor %}
+			<li><a href="compte.php">Compte</a></li>
+			<li><a href="panier.php">Panier</a></li>
+		</ul>
+		<ul class="flex dir-col">
+			<li class="titre-footer">Contacts :</li>
+			<li>Tél : +33 0.00.00.00.00</li>
+			<li>E-mail : contact@shoesspot.fr</li>
+		</ul>
+		<ul class="flex dir-col">
+			<li class="titre-footer">Mentions légales :</li>
+			<li>The Shoes Spot, France</li>
+			<li>BURKLE Eliott</li>
+		</ul>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,277 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
+}
+
+/* Utilitaires */
+
+.flex {
+    display: flex;
+}
+
+.dir-row {
+    flex-direction: row;
+}
+
+.dir-col {
+    flex-direction: column;
+}
+
+.wrapper {
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.spacebetween {
+    justify-content: space-between;
+}
+
+.center {
+    justify-content: center;
+    align-items: center;
+}
+
+.fullwidth {
+    width: 100%;
+}
+
+ul {
+    padding-left: 0 !important;
+}
+
+li {
+    list-style: none;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+/* Styles généraux */
+
+.button-submit {
+    border: 0;
+    padding: 10px 30px;
+    background-color: rgb(255, 119, 0);
+    color: white;
+    font-weight: bold;
+    width: fit-content;
+    text-decoration: none;
+    font-size: medium;
+    font-family: Arial;
+}
+
+.button-submit:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: 0.6s ease;
+    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75);
+}
+
+.form_tri .conteneur-btn {
+    color: white;
+    width: 120px;
+    height: 40px;
+    line-height: 100px;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+}
+
+.conteneur-btn .passif {
+    width: 120px;
+    height: 40px;
+    text-align: center;
+    background-color: rgb(255, 119, 0);
+    transition: 0.5s ease;
+    -webkit-transition: 0.5s ease;
+    -moz-transition: 0.5s ease;
+    -ms-transition: 0.5s ease;
+    -o-transition: 0.5s ease;
+}
+
+.conteneur-btn .actif {
+    width: 120px;
+    height: 40px;
+    text-align: center;
+    background-color: black;
+    position: relative;
+    top: -40px;
+    left: -120px;
+    transition: left 0.5s ease;
+    -webkit-transition: left 0.5s ease;
+    -moz-transition: left 0.5s ease;
+    -ms-transition: left 0.5s ease;
+    -o-transition: left 0.5s ease;
+}
+
+.texte {
+    position: relative;
+    color: white;
+    top: -110px;
+    height: 40px;
+    font-size: medium;
+    z-index: 100;
+    margin: 0;
+    text-align: center;
+    transition: 0.5s ease;
+    -webkit-transition: 0.5s ease;
+    -moz-transition: 0.5s ease;
+    -ms-transition: 0.5s ease;
+    -o-transition: 0.5s ease;
+}
+
+.conteneur-btn:hover .passif {
+    opacity: 0;
+}
+
+.conteneur-btn:hover .actif {
+    left: 0;
+}
+
+.conteneur-btn:hover .texte {
+    color: white;
+}
+
+.animated-button-submit {
+    border: 0;
+    padding: 0;
+    width: fit-content;
+}
+
+/* Header */
+
+header {
+    height: 120px;
+    background-color: white;
+}
+
+.header-title {
+    margin-left: 20px;
+}
+
+.bulles-header, .connected-button {
+    gap: 20px;
+    margin-right: 20px;
+}
+
+.bulles-header a {
+    font-size: 20px;
+    height: fit-content;
+    background-color: rgb(190, 190, 190);
+    padding: 15px;
+    border-radius: 50%;
+    color: rgb(53, 52, 52);
+}
+
+.connected-button a:nth-child(1) {
+    font-size: 20px;
+    height: fit-content;
+    color: white;
+    padding: 15px;
+    border-radius: 50px;
+    background-color:rgb(255, 119, 0);
+    text-decoration: none;
+}
+
+.connected-button a {
+    font-size: 20px;
+    height: fit-content;
+    background-color: rgb(190, 190, 190);
+    padding: 15px;
+    border-radius: 50%;
+    color: rgb(53, 52, 52);
+    transition: 0.5s ease;
+}
+
+.connected-button a:hover {
+    transform: translateY(-3px);
+    box-shadow: -2px 6px 5px 0px rgba(0,0,0,0.2);
+}
+
+.compte{
+    box-shadow: 0 0 0 0 rgb(255, 119, 0);
+    animation: pulse 1.3s infinite;
+}
+
+
+/* Nav */
+
+nav {
+    background-color: rgb(53, 52, 52);
+    padding: 15px;
+}
+
+.nav-cat {
+    gap: 30px;
+    margin: 0;
+}
+
+.nav-cat a {
+    color: white;
+    text-decoration: none;
+    transition: 0.6s ease;
+}
+
+.nav-cat a:hover {
+    color: rgb(255, 119, 0);
+}
+
+/* Main */
+
+main {
+    flex: 1;
+}
+
+article:hover h2 {
+    color: rgb(255, 119, 0);
+    transition: 0.5s ease;
+}
+
+/* Aside */
+
+aside {
+    max-width: 200px;
+    padding: 30px;
+}
+
+.header_article {
+    margin-top: 20px;
+}
+
+.titre_categorie {
+    width: fit-content;
+}
+
+/* Footer */
+
+footer {
+    margin-top: 150px;
+    background-color: black;
+    color: white;
+    padding: 20px 0;
+    justify-content: space-around;
+    width: 100%;
+    bottom: 0;
+}
+
+footer a {
+    color: white;
+}
+
+.titre-footer {
+    text-decoration: underline;
+    font-size: larger;
+    margin-bottom: 10px;
+}
+
+
+@keyframes pulse{
+to{
+    box-shadow: 0 0 0 6px rgb(255, 157, 71, 0) ;
+}
+}

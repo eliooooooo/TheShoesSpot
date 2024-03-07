@@ -6,4 +6,4 @@ Il a été réalisé en deux semaines, dans le cadre de mes études.
 
 ## Organisation de la base de donnée :
   
-![](https://github.com/eliooooooo/TheShoesSpot/blob/main/structure-db.png)
+![Base de donnée](https://github.com/eliooooooo/TheShoesSpot/blob/main/structure-db.png)
